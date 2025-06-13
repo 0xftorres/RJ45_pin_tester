@@ -1,4 +1,3 @@
-
 #include <LiquidCrystal_I2C.h>
 
 // Connector 1
@@ -8,22 +7,22 @@
 #define PinC1_4 3
 #define PinC1_5 4
 #define PinC1_6 5
-#define PinC1_7 16
-#define PinC1_8 17
+#define PinC1_7 6
+#define PinC1_8 7
 
-// Connector 2 pin 12 no funcina
+// Connector 2
 #define PinC2_1 8
 #define PinC2_2 9
 #define PinC2_3 10
 #define PinC2_4 11
-#define PinC2_5 7
+#define PinC2_5 12
 #define PinC2_6 13
 #define PinC2_7 14
 #define PinC2_8 15
 
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
-// Array de pines para c/ conector
+// Pin array for each connector
 // Output
 const int CO[] = {PinC1_1, PinC1_2, PinC1_3, PinC1_4, PinC1_5, PinC1_6, PinC1_7, PinC1_8};
 // Input
@@ -88,10 +87,14 @@ void setAllOutput(int con[]){
 
 void cableNotDetectedScreen(){
   lcd.clear();
-  lcd.print("Conectar cables RJ45");
+  lcd.setCursor(0,0);
+  lcd.print("Cable not connected!");
 
-   for (int i=0; i < 20; i++) {
-    lcd.setCursor(i,2);
+  lcd.setCursor(1,3);
+  lcd.print("Made by @0xftorres");
+
+  for (int i=0; i < 20; i++) {
+    lcd.setCursor(i,1);
     if(i%2==0) {
       lcd.print("-");
     } else{
@@ -189,4 +192,3 @@ void loop()
     cableNotDetectedScreen();
   }
 }
-
