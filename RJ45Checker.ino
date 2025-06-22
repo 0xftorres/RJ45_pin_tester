@@ -20,6 +20,9 @@
 #define PinC2_7 14
 #define PinC2_8 15
 
+#define HIGH_PullUp LOW
+#define LOW_PullUp HIGH
+
 LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 // Pin array for each connector
@@ -42,12 +45,12 @@ const int StraightThrough[][3] = {
 
 // Connections matrix for CrossOver
 const int CrossOver[][3] = {
-  {PinC1_1, PinC2_1, 0},
-  {PinC1_2, PinC2_2, 0},
-  {PinC1_3, PinC2_6, 0},
+  {PinC1_1, PinC2_3, 0},
+  {PinC1_2, PinC2_6, 0},
+  {PinC1_3, PinC2_1, 0},
   {PinC1_4, PinC2_4, 0},
   {PinC1_5, PinC2_5, 0},
-  {PinC1_6, PinC2_3, 0},
+  {PinC1_6, PinC2_2, 0},
   {PinC1_7, PinC2_7, 0},
   {PinC1_8, PinC2_8, 0}
 };
@@ -59,21 +62,21 @@ void setBitIO(int pin, int state){
 
 void setAllLow(int con[]){
   for(int i=0; i < 8; i++){
-    setBitIO(con[i], LOW);
+    setBitIO(con[i], LOW_PullUp);
     delay(10);
   }
 }
 
 void setAllHigh(int con[]){
   for(int i=0; i < 8; i++){
-    setBitIO(con[i], HIGH);
+    setBitIO(con[i], HIGH_PullUp);
     delay(10);
   }
 }
 
 void setAllInput(int con[]){
   for(int i=0; i < 8; i++){
-    pinMode(con[i], INPUT);
+    pinMode(con[i], INPUT_PULLUP);
     delay(10);
   }
 }
@@ -107,7 +110,7 @@ void cableNotDetectedScreen(){
 bool detectCable(){
   setAllHigh(CO);
   for(int i=0; i < 8; i++){
-    if (digitalRead(CI[i]) == HIGH){
+    if (digitalRead(CI[i]) == HIGH_PullUp){
       return true;
     }
     delay(10);
@@ -123,24 +126,25 @@ void comparePins(int S[][3]){
   for (int i=0; i < 8; i++){
 
     // set pin to 1
-    setBitIO(S[i][0], HIGH);
+    setBitIO(S[i][0], HIGH_PullUp);
 
-    if (digitalRead(S[i][1]) == HIGH){
+    if (digitalRead(S[i][1]) == HIGH_PullUp){
       // link is correct
-      Serial.print(S[i][0]);
-      Serial.print("-->");
-      Serial.println(S[i][1]);
       
       lcd.print("| ");
       delay(50);
     } else{
       // link is incorrect
+
+      Serial.print(S[i][0]);
+      Serial.print("-->");
+      Serial.println(S[i][1]);
       lcd.print("X ");
       delay(50);
     }
 
     // set pin back to 0
-    setBitIO(S[i][0], LOW);
+    setBitIO(S[i][0], LOW_PullUp);
   }
 }
 
