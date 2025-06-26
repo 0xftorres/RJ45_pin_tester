@@ -32,27 +32,27 @@ const int CO[] = {PinC1_1, PinC1_2, PinC1_3, PinC1_4, PinC1_5, PinC1_6, PinC1_7,
 const int CI[] = {PinC2_1, PinC2_2, PinC2_3, PinC2_4, PinC2_5, PinC2_6, PinC2_7, PinC2_8};
 
 // Connections matrix for StraightThrough
-const int StraightThrough[][3] = {
-  {PinC1_1, PinC2_1, 0},
-  {PinC1_2, PinC2_2, 0},
-  {PinC1_3, PinC2_3, 0},
-  {PinC1_4, PinC2_4, 0},
-  {PinC1_5, PinC2_5, 0},
-  {PinC1_6, PinC2_6, 0},
-  {PinC1_7, PinC2_7, 0},
-  {PinC1_8, PinC2_8, 0}
+const int StraightThrough[][2] = {
+  {PinC1_1, PinC2_1},
+  {PinC1_2, PinC2_2},
+  {PinC1_3, PinC2_3},
+  {PinC1_4, PinC2_4},
+  {PinC1_5, PinC2_5},
+  {PinC1_6, PinC2_6},
+  {PinC1_7, PinC2_7},
+  {PinC1_8, PinC2_8}
 };
 
 // Connections matrix for CrossOver
-const int CrossOver[][3] = {
-  {PinC1_1, PinC2_3, 0},
-  {PinC1_2, PinC2_6, 0},
-  {PinC1_3, PinC2_1, 0},
-  {PinC1_4, PinC2_4, 0},
-  {PinC1_5, PinC2_5, 0},
-  {PinC1_6, PinC2_2, 0},
-  {PinC1_7, PinC2_7, 0},
-  {PinC1_8, PinC2_8, 0}
+const int CrossOver[][2] = {
+  {PinC1_1, PinC2_3},
+  {PinC1_2, PinC2_6},
+  {PinC1_3, PinC2_1},
+  {PinC1_4, PinC2_7},
+  {PinC1_5, PinC2_8},
+  {PinC1_6, PinC2_2},
+  {PinC1_7, PinC2_4},
+  {PinC1_8, PinC2_5}
 };
 
 void setBitIO(int pin, int state){
@@ -118,7 +118,7 @@ bool detectCable(){
   return false;
 }
 
-void comparePins(int S[][3]){
+void comparePins(int S[][2]){
   // set every output pin to low
   setAllLow(CO);
 
