@@ -1,9 +1,9 @@
 #include <LiquidCrystal_I2C.h>
 
 // Connector 1
-#define PinC1_1 1
-#define PinC1_2 0
-#define PinC1_3 2
+#define PinC1_1 16
+#define PinC1_2 17
+#define PinC1_3 2                           
 #define PinC1_4 3
 #define PinC1_5 4
 #define PinC1_6 5
