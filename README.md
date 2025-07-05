@@ -1,4 +1,4 @@
-# RJ45_checker
+# RJ45 pin tester
 
 Library used for the LCD display:
 
